@@ -47,7 +47,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
                 int first = Integer.parseInt(firstInput);
                 int second = Integer.parseInt(secondInput);
 
-                String message = String.format("Result", first + second);
+                String message = String.format("Result %d", first + second);
 
                 request.setAttribute("message", message);
             } catch (Exception ex) {
