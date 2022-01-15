@@ -25,7 +25,7 @@
             <input type="submit" name="minus" id="minus" value="-">
             <input type="submit" name="multiply" id="multiply" value="*">
             <input type="submit" name="modulus" id="modulus" value="%">
-            <button type="submit">Age next birthday</button>
+
             
           
             <br>
