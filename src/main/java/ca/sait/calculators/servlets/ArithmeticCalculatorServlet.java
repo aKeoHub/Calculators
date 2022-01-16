@@ -41,20 +41,32 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
 
         String firstInput = request.getParameter("first");
         String secondInput = request.getParameter("second");
+        String message;
 
         if (firstInput != null && secondInput != null) {
             try {
                 int first = Integer.parseInt(firstInput);
                 int second = Integer.parseInt(secondInput);
-
-                String message = String.format("Result %d", first + second);
+                String operation = request.getParameter("operation");
+                message = "Result";
+                if (operation.equals("+")) {
+                    message = String.format("%s: %d", message, first + second);
+                } else if (operation.equals("-")) {
+                    message = String.format("%s: %d", message, first - second);
+                } else if (operation.equals("*")) {
+                    message = String.format("%s: %d", message, first * second);
+                } else if (operation.equals("%")) {
+                    message = String.format("%s: %d", message, first % second);
+                }
 
                 request.setAttribute("message", message);
+                request.setAttribute("first", firstInput);
+                request.setAttribute("second", secondInput);
             } catch (Exception ex) {
                 //Age input exists but is not a number
+
             }
         } else {
-            //Age input is missing.
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
