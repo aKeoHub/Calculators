@@ -40,23 +40,24 @@ public class AgeCalculatorServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NumberFormatException {
 
         String ageInput = request.getParameter("age");
-
-        if (ageInput != null) {
+        String message = "";
+        if (ageInput.equals("")) {
+            message = "You must give your current age";
+            request.setAttribute("message", message);
+        } else {
             try {
                 int age = Integer.parseInt(ageInput);
                 age++;
-                String message = String.format("You will be %d after your next birthday", age);
+                message = String.format("You will be %d after your next birthday", age);
 
-                request.setAttribute("message", message);
-            } catch (Exception ex) {
-                //Age input exists but is not a number
+            } catch (NumberFormatException ex) {
+                message = "Please enter a number.";
             }
-        } else {
-            //Age input is missing.
         }
+        request.setAttribute("message", message);
 
         getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
     }

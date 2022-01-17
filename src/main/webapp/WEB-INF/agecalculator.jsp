@@ -22,11 +22,13 @@
             <br>
             <button type="submit">Age next birthday</button>
             <br>
+            <p>${message}</p>
+            <br>
             <a href="arithmetic">Arithmetic Calculator</a>
             
             
         </form>
         
-        <p>${message}</p>
+        
     </body>
 </html>
