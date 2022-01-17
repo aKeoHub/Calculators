@@ -24,6 +24,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("result", "---");
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
     }
 
@@ -41,32 +42,32 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
 
         String firstInput = request.getParameter("first");
         String secondInput = request.getParameter("second");
-        String message;
 
         if (firstInput != null && secondInput != null) {
             try {
                 int first = Integer.parseInt(firstInput);
                 int second = Integer.parseInt(secondInput);
                 String operation = request.getParameter("operation");
-                message = "Result";
-                if (operation.equals("+")) {
-                    message = String.format("%s: %d", message, first + second);
-                } else if (operation.equals("-")) {
-                    message = String.format("%s: %d", message, first - second);
-                } else if (operation.equals("*")) {
-                    message = String.format("%s: %d", message, first * second);
-                } else if (operation.equals("%")) {
-                    message = String.format("%s: %d", message, first % second);
-                }
+                int result = 0;
 
-                request.setAttribute("message", message);
+                if (operation.equals("+")) {
+                    result = first + second;
+                } else if (operation.equals("-")) {
+                    result = first - second;
+                } else if (operation.equals("*")) {
+                    result = first * second;
+                } else if (operation.equals("%")) {
+                    result = first % second;
+                }
+                request.setAttribute("result", result);
                 request.setAttribute("first", firstInput);
                 request.setAttribute("second", secondInput);
-            } catch (Exception ex) {
-                //Age input exists but is not a number
 
+            } catch (Exception ex) {
+                request.setAttribute("result", "Invalid");
             }
         } else {
+            request.setAttribute("result", "Invalid");
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);

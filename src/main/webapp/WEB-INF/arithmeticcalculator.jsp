@@ -26,17 +26,13 @@
             <input type="submit" name="operation" id="multiply" value="*">
             <input type="submit" name="operation" id="modulus" value="%">
 
-
-
+            <br>
             <br>
 
-            <br>
-            <p>${message}</p>
+            <p>Result: ${result}</p>
             <a href="age">Age Calculator</a>
 
-
-
         </form>
-        
+
     </body>
 </html>
